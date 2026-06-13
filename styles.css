@@ -92,3 +92,28 @@ li button {
 li button:hover {
   background-color: #b71c1c;
 }
+.edit-btn {
+  background-color: #1976d2;
+  border: none;
+  padding: 5px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.edit-btn:hover {
+  background-color: #0d47a1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+}
+/* Tablet  Responsiveness*/
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    width: 80%;
+  }
+}

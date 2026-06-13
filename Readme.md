@@ -36,3 +36,68 @@ listItem.appendChild(deleteBtn);
 ```
 
 - Using `listItem.remove(); ` inside the delete add event listener to remove the list item once it is clicked.
+## Adding Read Feature
+ Before adding this feature i updated my whole Js code to activate only when the whole page is loaded using
+ ```js
+ document.addEventListener("DOMContentLoaded", function() {});
+ ```
+ Creating a save task function that stores the task in the local storage
+ ```js
+  function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+  ```
+  then pushing the save task immediately after pushing each task.
+
+
+## Adding an Update Function
+First i created an Edit button
+Added an event listener to ensure when the button is clicked an action can be done
+```js 
+ li.querySelector(".edit-btn").addEventListener("click", (e) => {
+     e.stopPropagation(); 
+     editingTaskId = task.id;
+  todoInput.value = task.text;
+  todoInput.focus();
+
+  addTaskBtn.textContent = "Update Task";
+    
+  })
+```
+I also created a updateTask function 
+```js
+ function updateTask(id, newText) {
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+      task.text = newText;
+      saveTasks();
+    }
+  }
+```
+
+After creating the update function i got stuck and had to turn to AI for help in understanding how to ensure the update is done in the input as the Add Task and it assisted in creating a variable to track the editing
+```js
+let editingTaskId = null;
+```
+
+I also add to put the edit task into the event listener for adding task
+
+The Logic was a bit confusing for now but i guess a little more practise and I will be good
+```js
+// Editing an existing task
+  if (editingTaskId !== null) {
+    updateTask(editingTaskId, taskText);
+    const li = document.querySelector(
+      `[data-id="${editingTaskId}"]`
+    );
+    li.querySelector("span").textContent = taskText;
+
+    editingTaskId = null;
+    addTaskBtn.textContent = "Add Task";
+    todoInput.value = "";
+    return;
+  }
+```
+With this the CRUD- Create,Read, Update and Delete operations are complete
+
+I now have to go to the CSS to ensure the app is responsive on mobile also
